@@ -7,11 +7,12 @@ function RepositoryList() {
   const [filters, setFilters] = useState({ orderBy: 'CREATED_AT' });
   const [searchKeyword, setSearchKeyword] = useState('');
   const [searchKeywordDebounced] = useDebounce(searchKeyword, 500);
-  const { repositories, fetchMore } = useRepositories(filters, searchKeywordDebounced);
+  const { repositories, loading, fetchMore } = useRepositories(filters, searchKeywordDebounced);
 
   return (
     <RepositoryListContainer
       repositories={repositories}
+      loading={loading}
       filters={filters}
       searchKeyword={searchKeyword}
       onFiltersChange={setFilters}

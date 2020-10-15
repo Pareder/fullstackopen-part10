@@ -1,7 +1,8 @@
-import React, { Component, useMemo } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FlatList } from 'react-native';
 import Filters from './Filters';
+import Loader from '../Loader';
 import ItemSeparator from '../ItemSeparator';
 import TouchableRepositoryItem from './TouchableRepositoryItem';
 
@@ -9,6 +10,7 @@ const propTypes = {
   repositories: PropTypes.shape({
     edges: PropTypes.array.isRequired,
   }),
+  loading: PropTypes.bool,
   filters: PropTypes.object.isRequired,
   searchKeyword: PropTypes.string,
   onFiltersChange: PropTypes.func.isRequired,
@@ -16,6 +18,7 @@ const propTypes = {
 };
 const defaultProps = {
   repositories: undefined,
+  loading: false,
   searchKeyword: '',
 };
 
@@ -33,6 +36,7 @@ class RepositoryListContainer extends Component {
       <FlatList
         data={repositoryNodes}
         ListHeaderComponent={this.renderHeader}
+        ListFooterComponent={() => <Loader loading={this.props.loading}/>}
         ItemSeparatorComponent={ItemSeparator}
         renderItem={({ item }) => <TouchableRepositoryItem {...item}/>}
         onEndReached={this.props.onEndReach}

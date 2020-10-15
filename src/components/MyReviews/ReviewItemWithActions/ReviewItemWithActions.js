@@ -27,11 +27,7 @@ function ReviewItemWithActions({ id, repository, ...props}) {
       'Delete review',
       'Are you sure you want to delete this review?',
       [
-        {
-          text: 'Cancel',
-          onPress: () => console.log('Cancel is pressed'),
-          style: 'cancel',
-        },
+        { text: 'Cancel' },
         {
           text: 'Delete',
           onPress: () => deleteReview(id)
